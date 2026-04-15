@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Brand colors */
   --color-brand-red: #C1121F;
   --color-brand-red-dark: #9b0e18;
   --color-brand-blue: #000033;
   --color-brand-blue-light: #000055;
+
+  /* Typography */
+  --font-sans: var(--font-google-sans-flex), system-ui, sans-serif;
+
+  /* Background / foreground */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 :root {
@@ -23,5 +27,12 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Bouncy easing for interactions */
+* {
+  --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
