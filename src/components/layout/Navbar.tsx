@@ -16,6 +16,33 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
+function LogoMark() {
+  const [imgError, setImgError] = useState(false);
+
+  if (imgError) {
+    /* Fallback: initials shield */
+    return (
+      <div className="w-10 h-10 rounded-xl bg-brand-red flex items-center justify-center flex-shrink-0">
+        <span className="text-white font-black text-sm tracking-tight">DM</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-10 h-10 flex-shrink-0">
+      <Image
+        src="/images/logo.png"
+        alt="De-Masters Academy crest"
+        fill
+        sizes="40px"
+        className="object-contain drop-shadow-sm"
+        priority
+        onError={() => setImgError(true)}
+      />
+    </div>
+  );
+}
+
 export default function Navbar() {
   const scrolled = useScroll(60);
   const pathname = usePathname();
@@ -33,16 +60,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 flex-shrink-0">
-            <Image
-              src="/images/logo.png"
-              alt="De-Masters Academy crest"
-              fill
-              sizes="40px"
-              className="object-contain drop-shadow-sm"
-              priority
-            />
-          </div>
+          <LogoMark />
           <div className="flex flex-col leading-tight">
             <span className="text-white font-bold text-[17px] tracking-wide">
               De-Masters
@@ -63,9 +81,7 @@ export default function Navbar() {
                 href={href}
                 className={[
                   'relative px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-200 group',
-                  active
-                    ? 'text-white'
-                    : 'text-white/75 hover:text-white hover:bg-white/8',
+                  active ? 'text-white' : 'text-white/75 hover:text-white hover:bg-white/8',
                 ].join(' ')}
               >
                 {label}
@@ -79,7 +95,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-
           <Link
             href="/admissions"
             className="ml-3 bg-brand-red text-white text-sm font-semibold px-5 py-2.5 rounded-2xl hover:bg-brand-red-dark hover:shadow-lg hover:shadow-brand-red/30 transition-all duration-300"
@@ -120,9 +135,7 @@ export default function Navbar() {
                     className={[
                       'py-3 px-4 rounded-xl text-base font-medium transition-colors',
                       'border-b border-white/8 last:border-0',
-                      active
-                        ? 'text-brand-red bg-brand-red/8'
-                        : 'text-white/80 hover:text-white hover:bg-white/8',
+                      active ? 'text-brand-red bg-brand-red/8' : 'text-white/80 hover:text-white hover:bg-white/8',
                     ].join(' ')}
                   >
                     {label}

@@ -6,8 +6,8 @@ import { ArrowRight01Icon } from 'hugeicons-react';
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
-      {/* Video background */}
+    <section className="relative h-screen min-h-[680px] flex items-center overflow-hidden">
+      {/* Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
         src="/video/hero.mp4"
@@ -17,99 +17,84 @@ export default function Hero() {
         playsInline
       />
 
-      {/* Layered overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-br from-brand-blue/85 via-black/65 to-brand-blue/50" />
-      {/* Red accent bottom stripe */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red to-transparent z-20" />
+      {/* Single clean overlay — dark left, transparent right */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-blue/60 via-transparent to-transparent" />
 
-      {/* Content */}
-      <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
+      {/* Content — left aligned, max half the screen */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-16">
+        <div className="max-w-2xl">
+          {/* Badge */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center gap-2 text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-6 bg-brand-red/12 px-4 py-2 rounded-full border border-brand-red/25"
+            transition={{ duration: 0.5 }}
+            className="text-brand-red text-xs font-bold tracking-[0.25em] uppercase mb-6 flex items-center gap-2"
           >
-            Welcome to
+            <span className="w-5 h-px bg-brand-red inline-block" />
+            Est. 2009 · Accra, Ghana
           </motion.p>
 
+          {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-5 tracking-tight"
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tight mb-6"
           >
-            De-Masters{' '}
+            De-Masters
+            <br />
             <span className="text-brand-red">Academy</span>
           </motion.h1>
 
+          {/* Subtext */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-            className="text-lg md:text-xl text-white/70 mb-4 tracking-[0.15em] font-light"
+            transition={{ delay: 0.25, duration: 0.6 }}
+            className="text-white/60 text-lg leading-relaxed mb-10 max-w-md"
           >
-            Excellence &bull; Discipline &bull; Innovation
+            Shaping Africa&apos;s brightest minds through world-class academics,
+            strong values, and boundless opportunity.
           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
-            className="text-base md:text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            A world-class learning institution committed to shaping the next
-            generation of leaders, innovators, and changemakers.
-          </motion.p>
-
+          {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex flex-wrap gap-3"
           >
             <Link
               href="/admissions"
-              className="group inline-flex items-center gap-2 bg-brand-red text-white font-semibold px-8 py-4 rounded-2xl text-base hover:bg-brand-red-dark hover:shadow-xl hover:shadow-brand-red/35 w-full sm:w-auto justify-center"
-              style={{ transition: 'all 0.3s var(--bounce)' }}
+              className="group inline-flex items-center gap-2 bg-brand-red text-white font-bold px-8 py-3.5 rounded-xl text-sm hover:bg-brand-red-dark hover:shadow-xl hover:shadow-brand-red/30 transition-all duration-300"
             >
               Apply Now
-              <ArrowRight01Icon
-                size={18}
-                className="transition-transform group-hover:translate-x-1 duration-200"
-              />
+              <ArrowRight01Icon size={16} className="transition-transform group-hover:translate-x-1 duration-200" />
             </Link>
             <Link
-              href="/about"
-              className="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-2xl text-base hover:border-white hover:bg-white/10 transition-all duration-300 w-full sm:w-auto justify-center backdrop-blur-sm"
+              href="/programs"
+              className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-8 py-3.5 rounded-xl text-sm hover:border-white hover:bg-white/10 transition-all duration-300"
             >
-              Discover More
+              Explore School
             </Link>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll dot */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
+        transition={{ delay: 1.2 }}
       >
-        <div className="flex flex-col items-center gap-1.5 text-white/40">
-          <span className="text-[10px] tracking-[0.25em] uppercase font-medium">Scroll</span>
-          <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent rounded-full overflow-hidden relative">
-            <motion.div
-              className="w-full h-4 bg-brand-red rounded-full absolute top-0"
-              animate={{ y: ['0%', '160%'] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.3 }}
-            />
-          </div>
+        <div className="w-5 h-8 rounded-full border border-white/25 flex items-start justify-center p-1">
+          <motion.div
+            className="w-1 h-2 rounded-full bg-brand-red"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </div>
       </motion.div>
     </section>

@@ -2,43 +2,49 @@
 
 import { motion } from 'framer-motion';
 import { Event } from '@/src/types';
-import { formatDate } from '@/src/utils/helpers';
-import { Calendar01Icon } from 'hugeicons-react';
 
-interface EventsProps {
-  events: Event[];
-}
+interface EventsProps { events: Event[] }
 
-const categoryColors: Record<string, { bg: string; text: string }> = {
-  Academic:    { bg: '#dbeafe', text: '#1d4ed8' },
-  Sports:      { bg: '#dcfce7', text: '#15803d' },
-  Arts:        { bg: '#ede9fe', text: '#6d28d9' },
-  Celebration: { bg: '#fef9c3', text: '#92400e' },
-  Admissions:  { bg: '#fee2e2', text: '#b91c1c' },
-  Community:   { bg: '#ffedd5', text: '#c2410c' },
+const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
+  Academic:    { bg: '#eff6ff', text: '#1d4ed8', border: '#3b82f6' },
+  Sports:      { bg: '#f0fdf4', text: '#15803d', border: '#22c55e' },
+  Arts:        { bg: '#f5f3ff', text: '#6d28d9', border: '#8b5cf6' },
+  Celebration: { bg: '#fefce8', text: '#854d0e', border: '#eab308' },
+  Admissions:  { bg: '#fff1f2', text: '#be123c', border: '#C1121F'  },
+  Community:   { bg: '#fff7ed', text: '#c2410c', border: '#f97316' },
 };
+
+function parseDateParts(dateStr: string) {
+  const d = new Date(dateStr);
+  return {
+    day:   d.getDate().toString().padStart(2, '0'),
+    month: d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
+  };
+}
 
 export default function Events({ events }: EventsProps) {
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-24 px-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-3">
+
+        {/* Header */}
+        <div className="mb-12">
+          <p className="text-brand-red text-xs font-bold tracking-[0.2em] uppercase mb-2">
             Stay Informed
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-4 leading-tight">
+          <h2 className="text-4xl font-black text-brand-blue leading-tight">
             Upcoming Events
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
-            Join us for exciting events that celebrate learning, talent, and
-            community.
-          </p>
         </div>
 
-        {/* Masonry grid via CSS columns */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {events.map((event, i) => {
-            const cat = categoryColors[event.category] ?? { bg: '#f3f4f6', text: '#374151' };
+            const cat = categoryColors[event.category] ?? {
+              bg: '#f9fafb', text: '#374151', border: '#9ca3af',
+            };
+            const { day, month } = parseDateParts(event.date);
+
             return (
               <motion.div
                 key={event.id}
@@ -46,36 +52,30 @@ export default function Events({ events }: EventsProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                className="break-inside-avoid mb-5"
+                className="group bg-white rounded-2xl p-5 flex items-center gap-5 border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                style={{ borderLeft: `3px solid ${cat.border}` }}
               >
-                <div className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                  {/* Date row */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-7 h-7 rounded-xl bg-brand-blue/8 flex items-center justify-center flex-shrink-0">
-                      <Calendar01Icon size={14} color="#000033" />
-                    </div>
-                    <time
-                      dateTime={event.date}
-                      className="text-xs font-semibold text-gray-400 tracking-wide"
-                    >
-                      {formatDate(event.date)}
-                    </time>
-                  </div>
+                {/* Date tile */}
+                <div
+                  className="w-14 h-14 rounded-xl flex flex-col items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: cat.bg }}
+                >
+                  <span className="text-xl font-black leading-none" style={{ color: cat.text }}>{day}</span>
+                  <span className="text-[9px] font-bold tracking-wider" style={{ color: cat.text }}>{month}</span>
+                </div>
 
-                  {/* Category badge */}
+                {/* Content */}
+                <div className="flex-1 min-w-0">
                   <span
-                    className="inline-block text-[11px] font-bold px-2.5 py-1 rounded-xl mb-3"
+                    className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md mb-1"
                     style={{ backgroundColor: cat.bg, color: cat.text }}
                   >
                     {event.category}
                   </span>
-
-                  <h3 className="text-base font-bold text-brand-blue mb-2 leading-snug group-hover:text-brand-red transition-colors duration-200">
+                  <h3 className="font-bold text-brand-blue text-sm leading-snug group-hover:text-brand-red transition-colors duration-200 mb-0.5">
                     {event.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    {event.description}
-                  </p>
+                  <p className="text-gray-400 text-xs leading-relaxed line-clamp-2">{event.description}</p>
                 </div>
               </motion.div>
             );

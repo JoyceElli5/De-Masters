@@ -2,110 +2,93 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Card from '@/src/components/ui/Card';
+import { ArrowRight01Icon } from 'hugeicons-react';
 import { Program } from '@/src/types';
-import {
-  FlowerPotIcon,
-  BookOpen01Icon,
-  MicroscopeIcon,
-  Mortarboard01Icon,
-  Robot01Icon,
-  PaintBrush01Icon,
-  ArrowRight01Icon,
-} from 'hugeicons-react';
-import type { FC } from 'react';
 
-interface IconProps { size?: number; color?: string; className?: string }
-const iconMap: Record<string, FC<IconProps>> = {
-  FlowerPot: FlowerPotIcon as FC<IconProps>,
-  BookOpen: BookOpen01Icon as FC<IconProps>,
-  Microscope: MicroscopeIcon as FC<IconProps>,
-  Mortarboard: Mortarboard01Icon as FC<IconProps>,
-  Robot: Robot01Icon as FC<IconProps>,
-  PaintBrush: PaintBrush01Icon as FC<IconProps>,
-};
-const iconColors: Record<string, string> = {
-  FlowerPot: '#16a34a', BookOpen: '#2563eb', Microscope: '#7c3aed',
-  Mortarboard: '#C1121F', Robot: '#0891b2', PaintBrush: '#d97706',
-};
-const iconBg: Record<string, string> = {
-  FlowerPot: '#dcfce7', BookOpen: '#dbeafe', Microscope: '#ede9fe',
-  Mortarboard: '#fee2e2', Robot: '#cffafe', PaintBrush: '#fef3c7',
+const programVisuals: Record<string, { gradient: string }> = {
+  FlowerPot:   { gradient: 'linear-gradient(145deg,#065f46,#10b981)' },
+  BookOpen:    { gradient: 'linear-gradient(145deg,#1e3a8a,#3b82f6)' },
+  Microscope:  { gradient: 'linear-gradient(145deg,#4c1d95,#8b5cf6)' },
+  Mortarboard: { gradient: 'linear-gradient(145deg,#7f1d1d,#C1121F)' },
+  Robot:       { gradient: 'linear-gradient(145deg,#0c4a6e,#0ea5e9)' },
+  PaintBrush:  { gradient: 'linear-gradient(145deg,#78350f,#f59e0b)' },
 };
 
 interface ProgramsProps { programs: Program[]; preview?: boolean }
 
 export default function Programs({ programs, preview = false }: ProgramsProps) {
-  const displayed = preview ? programs.slice(0, 3) : programs;
+  const displayed = preview ? programs.slice(0, 6) : programs;
 
   return (
-    <section className="py-20 px-6 bg-gray-50">
+    <section className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-3">
-            What We Offer
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-4 leading-tight">
-            Our Programmes
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
-            From early childhood to senior secondary, we offer comprehensive
-            academic programmes tailored to every stage of development.
-          </p>
+
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+          <div>
+            <p className="text-brand-red text-xs font-bold tracking-[0.2em] uppercase mb-2">
+              Education Pathways
+            </p>
+            <h2 className="text-4xl font-black text-brand-blue leading-tight">
+              Our Programmes
+            </h2>
+          </div>
+          <Link
+            href="/programs"
+            className="inline-flex items-center gap-1.5 text-brand-blue text-sm font-semibold hover:text-brand-red transition-colors group"
+          >
+            View All
+            <ArrowRight01Icon size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Uniform 3-column grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayed.map((program, i) => {
-            const IconComponent = iconMap[program.icon] ?? BookOpen01Icon as FC<IconProps>;
-            const iconColor = iconColors[program.icon] ?? '#2563eb';
-            const bgColor = iconBg[program.icon] ?? '#dbeafe';
+            const visual = programVisuals[program.icon] ?? programVisuals.BookOpen;
             return (
               <motion.div
                 key={program.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative rounded-2xl overflow-hidden cursor-pointer"
+                style={{ aspectRatio: '4/3' }}
               >
-                <Card className="h-full flex flex-col gap-4">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: bgColor }}
-                  >
-                    <IconComponent size={22} color={iconColor} />
-                  </div>
-                  <div className="flex-1 flex flex-col gap-2">
-                    <h3 className="text-lg font-bold text-brand-blue leading-snug">
-                      {program.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed flex-1">
-                      {program.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                    <span className="bg-brand-red/8 text-brand-red text-xs font-semibold px-3 py-1.5 rounded-xl">
-                      {program.duration}
-                    </span>
-                    <ArrowRight01Icon size={16} color="#C1121F" className="opacity-60" />
-                  </div>
-                </Card>
+                {/* Background */}
+                <div
+                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                  style={{ background: visual.gradient }}
+                />
+
+                {/* Bottom gradient for text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+
+                {/* Hover reveal: description */}
+                <div className="absolute inset-0 bg-brand-blue/90 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white/60 text-[11px] font-bold tracking-widest uppercase mb-3">
+                    {program.duration}
+                  </p>
+                  <p className="text-white text-sm leading-relaxed text-center">
+                    {program.description}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-brand-red text-xs font-bold">
+                    Learn more <ArrowRight01Icon size={13} color="#C1121F" />
+                  </span>
+                </div>
+
+                {/* Always visible: title */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <span className="text-white/70 text-[10px] font-bold tracking-widest uppercase block mb-1">
+                    {program.duration}
+                  </span>
+                  <h3 className="text-white font-black text-lg leading-tight">{program.title}</h3>
+                </div>
               </motion.div>
             );
           })}
         </div>
-
-        {preview && (
-          <div className="text-center mt-12">
-            <Link
-              href="/programs"
-              className="inline-flex items-center gap-2 bg-brand-blue text-white font-semibold px-8 py-4 rounded-2xl hover:bg-brand-blue-light hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
-              style={{ transition: 'all 0.3s var(--bounce)' }}
-            >
-              View All Programmes
-              <ArrowRight01Icon size={18} />
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );
