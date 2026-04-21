@@ -34,7 +34,7 @@ export default function Events({ events }: EventsProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
           {events.map((event, i) => (
             <motion.div
               key={event.id}
@@ -42,7 +42,7 @@ export default function Events({ events }: EventsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white border border-gray-100 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 flex flex-col gap-3"
+              className="break-inside-avoid mb-5 bg-white border border-gray-100 rounded-3xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3"
             >
               <div className="flex items-start justify-between gap-2">
                 <span
@@ -57,8 +57,8 @@ export default function Events({ events }: EventsProps) {
                   {formatDate(event.date)}
                 </time>
               </div>
-              <h3 className="text-lg font-bold text-brand-blue">{event.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed flex-1">
+              <h3 className="text-base md:text-lg font-bold text-brand-blue">{event.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
                 {event.description}
               </p>
             </motion.div>

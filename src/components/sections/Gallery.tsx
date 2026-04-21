@@ -12,6 +12,8 @@ const galleryImages = [
   { src: '/images/gallery-6.jpg', alt: 'School graduation ceremony' },
 ];
 
+const tileHeights = ['h-64', 'h-80', 'h-72', 'h-60', 'h-84', 'h-68'];
+
 export default function Gallery() {
   return (
     <section className="py-16 px-6 bg-gray-50">
@@ -29,7 +31,7 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           {galleryImages.map((img, i) => (
             <motion.div
               key={img.src}
@@ -37,13 +39,13 @@ export default function Gallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="relative aspect-square rounded-xl overflow-hidden group shadow-md"
+              className={`relative mb-4 break-inside-avoid ${tileHeights[i % tileHeights.length]} rounded-3xl overflow-hidden group shadow-md`}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes="(max-width: 768px) 50vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
               />

@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import { HugeiconsIcon } from '@hugeicons/react';
+import {
+  Location01Icon,
+  Call02Icon,
+  Mail01Icon,
+  Clock01Icon,
+} from '@hugeicons/core-free-icons';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -49,17 +56,17 @@ export default function Footer() {
           <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
           <ul className="flex flex-col gap-3 text-sm text-white/70">
             <li className="flex items-start gap-2">
-              <span>📍</span>
+              <span className="text-brand-red"><HugeiconsIcon icon={Location01Icon} size={18} /></span>
               <span>123 Academy Road, Education District, Ghana</span>
             </li>
             <li className="flex items-center gap-2">
-              <span>📞</span>
+              <span className="text-brand-red"><HugeiconsIcon icon={Call02Icon} size={18} /></span>
               <a href="tel:+233000000000" className="hover:text-brand-red transition-colors">
                 +233 00 000 0000
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <span>✉️</span>
+              <span className="text-brand-red"><HugeiconsIcon icon={Mail01Icon} size={18} /></span>
               <a
                 href="mailto:info@demastersacademy.edu.gh"
                 className="hover:text-brand-red transition-colors"
@@ -68,7 +75,7 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <span>🕐</span>
+              <span className="text-brand-red"><HugeiconsIcon icon={Clock01Icon} size={18} /></span>
               <span>Mon – Fri: 7:30 AM – 4:00 PM</span>
             </li>
           </ul>

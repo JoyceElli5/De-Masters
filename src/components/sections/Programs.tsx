@@ -2,6 +2,15 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { HugeiconsIcon } from '@hugeicons/react';
+import {
+  BookOpen02Icon,
+  Book01Icon,
+  AiIdeaIcon,
+  GraduationScrollIcon,
+  Rocket02Icon,
+  PaintBrush01Icon,
+} from '@hugeicons/core-free-icons';
 import Card from '@/src/components/ui/Card';
 import { Program } from '@/src/types';
 
@@ -9,6 +18,15 @@ interface ProgramsProps {
   programs: Program[];
   preview?: boolean;
 }
+
+const programIcons = {
+  '1': BookOpen02Icon,
+  '2': Book01Icon,
+  '3': AiIdeaIcon,
+  '4': GraduationScrollIcon,
+  '5': Rocket02Icon,
+  '6': PaintBrush01Icon,
+} as const;
 
 export default function Programs({ programs, preview = false }: ProgramsProps) {
   const displayed = preview ? programs.slice(0, 3) : programs;
@@ -39,7 +57,12 @@ export default function Programs({ programs, preview = false }: ProgramsProps) {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <Card className="h-full flex flex-col">
-                <div className="text-4xl mb-4">{program.icon}</div>
+                <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-red/10 text-brand-red">
+                  <HugeiconsIcon
+                    icon={programIcons[program.id as keyof typeof programIcons] ?? Book01Icon}
+                    size={30}
+                  />
+                </div>
                 <h3 className="text-xl font-bold text-brand-blue mb-2">
                   {program.title}
                 </h3>
@@ -56,7 +79,7 @@ export default function Programs({ programs, preview = false }: ProgramsProps) {
           <div className="text-center mt-10">
             <Link
               href="/programs"
-              className="inline-block bg-brand-blue text-white font-semibold px-8 py-3 rounded-lg hover:bg-brand-blue-light transition-colors duration-200"
+              className="inline-block bg-brand-blue text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-blue-light transition-colors duration-200"
             >
               View All Programmes
             </Link>

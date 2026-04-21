@@ -1,28 +1,35 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { HugeiconsIcon } from '@hugeicons/react';
+import {
+  Location01Icon,
+  Call02Icon,
+  Mail01Icon,
+  Clock01Icon,
+} from '@hugeicons/core-free-icons';
 import ContactForm from '@/src/components/forms/ContactForm';
 
 const contactDetails = [
   {
-    icon: '📍',
+    icon: Location01Icon,
     label: 'Address',
     value: '123 Academy Road, Education District, Ghana',
   },
   {
-    icon: '📞',
+    icon: Call02Icon,
     label: 'Phone',
     value: '+233 00 000 0000',
     href: 'tel:+233000000000',
   },
   {
-    icon: '✉️',
+    icon: Mail01Icon,
     label: 'Email',
     value: 'info@demastersacademy.edu.gh',
     href: 'mailto:info@demastersacademy.edu.gh',
   },
   {
-    icon: '🕐',
+    icon: Clock01Icon,
     label: 'Office Hours',
     value: 'Monday – Friday: 7:30 AM – 4:00 PM',
   },
@@ -32,8 +39,15 @@ export default function ContactPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-brand-blue text-white py-28 px-6 pt-32">
-        <div className="max-w-4xl mx-auto text-center">
+      <section
+        className="relative text-white py-28 px-6 pt-32 bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=80')",
+        }}
+      >
+        <div className="absolute inset-0 bg-brand-blue/80" />
+        <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -68,9 +82,9 @@ export default function ContactPage() {
               </h2>
               <div className="flex flex-col gap-5">
                 {contactDetails.map(({ icon, label, value, href }) => (
-                  <div key={label} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-xl flex-shrink-0">
-                      {icon}
+                  <div key={label} className="flex items-start gap-4 bg-white rounded-2xl p-4 shadow-sm">
+                    <div className="w-11 h-11 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center flex-shrink-0">
+                      <HugeiconsIcon icon={icon} size={22} />
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-0.5">
@@ -93,7 +107,7 @@ export default function ContactPage() {
             </div>
 
             {/* Google Map embed */}
-            <div className="rounded-xl overflow-hidden shadow-md h-56">
+            <div className="rounded-3xl overflow-hidden shadow-md h-56">
               <iframe
                 title="De-Masters Academy Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127521.50143226867!2d-0.2661!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9084b2b7a773%3A0xbed14ed8650e2dd3!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1699999999999!5m2!1sen!2sgh"

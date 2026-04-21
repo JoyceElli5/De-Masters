@@ -12,7 +12,7 @@ const stats = [
 
 export default function AboutPreview() {
   return (
-    <section className="py-16 px-6 bg-white">
+    <section className="py-18 px-6 bg-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Text */}
         <motion.div
@@ -25,21 +25,21 @@ export default function AboutPreview() {
             Who We Are
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-6 leading-tight">
-            Building Excellence Since 2009
+            A Purposeful School, Built Around Every Child
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            De-Masters Academy is a premier educational institution dedicated to
-            academic excellence, character formation, and holistic development.
-            We believe every child has the potential to achieve greatness.
+            De-Masters Academy combines academic rigor, values-based mentoring,
+            and modern learning tools so students grow in confidence, creativity,
+            and character.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
-            Our world-class faculty, modern facilities, and innovative curriculum
-            create an environment where students thrive academically, socially,
-            and creatively.
+            From classroom learning to leadership opportunities and co-curricular
+            experiences, we nurture well-rounded learners prepared for global
+            opportunities.
           </p>
           <Link
             href="/about"
-            className="inline-block bg-brand-red text-white font-semibold px-8 py-3 rounded-lg hover:bg-brand-red-dark transition-colors duration-200"
+            className="inline-block bg-brand-red text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-red-dark hover:-translate-y-0.5 transition-all duration-300"
           >
             Discover Our Story
           </Link>
@@ -56,7 +56,7 @@ export default function AboutPreview() {
           {stats.map(({ label, value }) => (
             <div
               key={label}
-              className="bg-brand-blue rounded-xl p-8 text-center text-white"
+              className="bg-brand-blue rounded-3xl p-7 text-center text-white shadow-xl hover:-translate-y-1 transition-transform duration-300"
             >
               <p className="text-4xl font-bold text-brand-red mb-2">{value}</p>
               <p className="text-sm text-white/80 font-medium">{label}</p>

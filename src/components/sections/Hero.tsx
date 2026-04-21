@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 export default function Hero() {
   return (
     <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Video background */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
         src="/video/hero.mp4"
@@ -17,7 +16,7 @@ export default function Hero() {
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      <div className="absolute inset-0 bg-brand-blue/72 z-10" />
 
       {/* Content */}
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
@@ -43,13 +42,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/admissions"
-              className="bg-brand-red text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-brand-red-dark transition-colors duration-200 w-full sm:w-auto text-center"
+              className="bg-brand-red text-white font-semibold px-8 py-4 rounded-full text-base hover:bg-brand-red-dark hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto text-center"
             >
               Apply Now
             </Link>
             <Link
               href="/about"
-              className="border-2 border-white text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-white hover:text-brand-blue transition-colors duration-200 w-full sm:w-auto text-center"
+              className="border-2 border-white text-white font-semibold px-8 py-4 rounded-full text-base hover:bg-white hover:text-brand-blue hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto text-center"
             >
               Learn More
             </Link>

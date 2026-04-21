@@ -1,31 +1,38 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { HugeiconsIcon } from '@hugeicons/react';
+import {
+  Award01Icon,
+  HandHelpingIcon,
+  AiIdeaIcon,
+  Globe02Icon,
+} from '@hugeicons/core-free-icons';
 import Staff from '@/src/components/sections/Staff';
 import CTA from '@/src/components/sections/CTA';
 import { staff } from '@/src/data/staff';
 
 const values = [
   {
-    icon: '🏆',
+    icon: Award01Icon,
     title: 'Excellence',
     description:
       'We set the highest academic standards and inspire every student to reach their full potential.',
   },
   {
-    icon: '🤝',
+    icon: HandHelpingIcon,
     title: 'Discipline',
     description:
       'We cultivate self-discipline, responsibility, and respect as cornerstones of character.',
   },
   {
-    icon: '💡',
+    icon: AiIdeaIcon,
     title: 'Innovation',
     description:
       'We embrace modern teaching methods and technology to prepare students for a rapidly changing world.',
   },
   {
-    icon: '🌍',
+    icon: Globe02Icon,
     title: 'Inclusivity',
     description:
       'We celebrate diversity and ensure every child feels seen, valued, and empowered to succeed.',
@@ -36,8 +43,15 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero banner */}
-      <section className="bg-brand-blue text-white py-28 px-6 mt-0 pt-32">
-        <div className="max-w-4xl mx-auto text-center">
+      <section
+        className="relative text-white py-28 px-6 mt-0 pt-32 bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=80')",
+        }}
+      >
+        <div className="absolute inset-0 bg-brand-blue/80" />
+        <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,14 +83,14 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
               Founded in 2009, De-Masters Academy has grown from a small community
-              school into one of the region's most respected educational institutions.
+              school into one of the region&apos;s most respected educational institutions.
               We serve over 1,200 students from Early Childhood through Senior
               Secondary.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
               Our modern campus is equipped with science laboratories, a
               well-stocked library, sports facilities, ICT suites, and dedicated
-              arts spaces — all designed to support every dimension of a student's
+              arts spaces — all designed to support every dimension of a student&apos;s
               development.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
@@ -90,19 +104,19 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-50 rounded-2xl p-8 space-y-6"
+            className="bg-gradient-to-br from-brand-blue via-[#10104a] to-brand-blue-light rounded-4xl p-8 md:p-10 space-y-6 text-white shadow-2xl"
           >
-            <div className="border-l-4 border-brand-red pl-6">
-              <h3 className="text-xl font-bold text-brand-blue mb-2">Our Mission</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="rounded-3xl bg-white/10 border border-white/20 p-6">
+              <h3 className="text-2xl font-bold mb-3">Our Mission</h3>
+              <p className="text-white/80 leading-relaxed">
                 To provide a world-class education that equips students with the
                 knowledge, skills, values, and character needed to lead and serve
                 in a global community.
               </p>
             </div>
-            <div className="border-l-4 border-brand-blue pl-6">
-              <h3 className="text-xl font-bold text-brand-blue mb-2">Our Vision</h3>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="rounded-3xl bg-brand-red/20 border border-white/20 p-6">
+              <h3 className="text-2xl font-bold mb-3">Our Vision</h3>
+              <p className="text-white/85 leading-relaxed">
                 To be the leading centre of excellence in education — producing
                 graduates who are academically outstanding, morally grounded, and
                 globally competitive.
@@ -129,9 +143,11 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
+                className="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-center"
               >
-                <div className="text-4xl mb-3">{val.icon}</div>
+                <div className="mb-3 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-red/10 text-brand-red">
+                  <HugeiconsIcon icon={val.icon} size={30} />
+                </div>
                 <h3 className="text-lg font-bold text-brand-blue mb-2">{val.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{val.description}</p>
               </motion.div>

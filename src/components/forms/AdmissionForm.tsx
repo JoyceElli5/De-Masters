@@ -47,7 +47,7 @@ export default function AdmissionForm() {
     <form
       onSubmit={(e) => handleSubmit(e, onSubmit, validate)}
       noValidate
-      className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-5"
+      className="bg-white rounded-3xl shadow-lg p-8 flex flex-col gap-5"
     >
       <h3 className="text-2xl font-bold text-brand-blue">Application Form</h3>
 
@@ -117,13 +117,13 @@ export default function AdmissionForm() {
 
       {/* Feedback */}
       {formState.error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+        <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-2xl">
           {formState.error}
         </div>
       )}
       {formState.isSuccess && (
-        <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg">
-          ✅ Application submitted successfully! We will be in touch within 3–5 business days.
+        <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-2xl">
+          Application submitted successfully. We will be in touch within 3-5 business days.
         </div>
       )}
 

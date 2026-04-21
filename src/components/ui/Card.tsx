@@ -13,8 +13,8 @@ export default function Card({
   return (
     <div
       className={[
-        'bg-white rounded-xl shadow-md p-6',
-        hover ? 'transition-transform duration-300 hover:scale-105 hover:shadow-lg' : '',
+        'bg-white rounded-3xl shadow-md p-6',
+        hover ? 'transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl' : '',
         className,
       ].join(' ')}
       {...props}

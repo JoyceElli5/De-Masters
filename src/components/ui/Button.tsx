@@ -39,8 +39,9 @@ export default function Button({
     <button
       disabled={disabled || isLoading}
       className={[
-        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold',
-        'transition-all duration-200 cursor-pointer',
+        'inline-flex items-center justify-center gap-2 rounded-2xl font-semibold',
+        'transition-all duration-300 cursor-pointer',
+        'hover:-translate-y-0.5 hover:scale-[1.01] active:translate-y-0 active:scale-[0.99]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
         'disabled:opacity-60 disabled:cursor-not-allowed',
         variantClasses[variant],

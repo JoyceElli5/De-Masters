@@ -31,7 +31,7 @@ export default function Select({
       <select
         id={selectId}
         className={[
-          'rounded-lg border px-4 py-3 text-base outline-none transition-colors bg-white',
+          'rounded-2xl border px-4 py-3 text-base outline-none transition-all bg-white',
           'focus:border-brand-red focus:ring-2 focus:ring-brand-red/20',
           error ? 'border-red-500 bg-red-50' : 'border-gray-300',
           className,

@@ -63,7 +63,7 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-5"
+      className="bg-white rounded-3xl shadow-lg p-8 flex flex-col gap-5"
     >
       <h3 className="text-2xl font-bold text-brand-blue">Send Us a Message</h3>
 
@@ -110,7 +110,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Write your message here..."
           className={[
-            'rounded-lg border px-4 py-3 text-base outline-none transition-colors resize-none',
+            'rounded-2xl border px-4 py-3 text-base outline-none transition-all resize-none',
             'focus:border-brand-red focus:ring-2 focus:ring-brand-red/20',
             errors.message ? 'border-red-500 bg-red-50' : 'border-gray-300',
           ].join(' ')}
@@ -121,13 +121,13 @@ export default function ContactForm() {
       </div>
 
       {formState.error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+        <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-2xl">
           {formState.error}
         </div>
       )}
       {formState.isSuccess && (
-        <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg">
-          ✅ Message sent! We&apos;ll get back to you within 24 hours.
+        <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-2xl">
+          Message sent. We&apos;ll get back to you within 24 hours.
         </div>
       )}
 

@@ -9,8 +9,15 @@ export default function ProgramsPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-brand-blue text-white py-28 px-6 pt-32">
-        <div className="max-w-4xl mx-auto text-center">
+      <section
+        className="relative text-white py-28 px-6 pt-32 bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=80')",
+        }}
+      >
+        <div className="absolute inset-0 bg-brand-blue/80" />
+        <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,7 +60,7 @@ export default function ProgramsPage() {
               'Accept and pay the enrolment fee to secure your place.',
             ].map((step, i) => (
               <li key={i} className="flex items-start gap-3 text-gray-700">
-                <span className="w-7 h-7 rounded-full bg-brand-red text-white text-sm font-bold flex-shrink-0 flex items-center justify-center">
+                <span className="w-8 h-8 rounded-full bg-brand-red text-white text-sm font-bold flex-shrink-0 flex items-center justify-center">
                   {i + 1}
                 </span>
                 {step}

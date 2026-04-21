@@ -22,7 +22,7 @@ export default function Staff({ staff }: StaffProps) {
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto text-lg">
             Our dedicated faculty and staff are the heart of De-Masters
-            Academy — committed to every student's success.
+            Academy — committed to every student&apos;s success.
           </p>
         </div>
 
