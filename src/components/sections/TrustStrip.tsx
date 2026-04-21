@@ -1,39 +1,36 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Award01Icon, StudentsIcon, TeacherIcon, Certificate01Icon } from 'hugeicons-react';
 
 const stats = [
-  { Icon: Award01Icon,      value: '15+',    label: 'Years of Excellence', color: '#C1121F' },
-  { Icon: StudentsIcon,     value: '1,200+', label: 'Students Enrolled',   color: '#2563eb' },
-  { Icon: TeacherIcon,      value: '80+',    label: 'Qualified Staff',     color: '#0891b2' },
-  { Icon: Certificate01Icon, value: '95%',   label: 'Exam Pass Rate',      color: '#16a34a' },
+  { value: '15+',    label: 'Years of Excellence'  },
+  { value: '1,200+', label: 'Students Enrolled'    },
+  { value: '80+',    label: 'Qualified Staff'       },
+  { value: '95%',    label: 'Exam Pass Rate'        },
 ];
 
 export default function TrustStrip() {
   return (
-    <section className="bg-white border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-6 py-14">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-gray-100">
-          {stats.map(({ Icon, value, label, color }, i) => (
+    <section className="bg-white border-b border-slate-100">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-slate-100">
+          {stats.map(({ value, label }, i) => (
             <motion.div
               key={label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center lg:items-start gap-3 lg:px-10 first:pl-0 last:pr-0 text-center lg:text-left"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="flex flex-col items-center py-10 px-6 gap-2 text-center"
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: `${color}15` }}
-              >
-                <Icon size={20} color={color} />
-              </div>
-              <div>
-                <p className="text-3xl font-black leading-none mb-1" style={{ color }}>{value}</p>
-                <p className="text-gray-500 text-sm font-medium">{label}</p>
-              </div>
+              <span className="font-serif text-4xl font-bold text-navy leading-none">
+                {value}
+              </span>
+              {/* Thin red accent line */}
+              <span className="w-6 h-px bg-accent block" />
+              <span className="text-slate-500 text-xs font-medium tracking-wide">
+                {label}
+              </span>
             </motion.div>
           ))}
         </div>

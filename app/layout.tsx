@@ -1,12 +1,19 @@
 import type { Metadata } from 'next';
-import { Google_Sans_Flex } from 'next/font/google';
+import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/src/components/layout/Navbar';
 import Footer from '@/src/components/layout/Footer';
 
-const googleSansFlex = Google_Sans_Flex({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-google-sans-flex',
+  variable: '--font-playfair',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -27,14 +34,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={googleSansFlex.variable}>
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="min-h-screen flex flex-col antialiased bg-white text-slate-800">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

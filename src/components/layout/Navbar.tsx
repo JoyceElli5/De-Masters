@@ -6,36 +6,35 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@/src/hooks/useScroll';
-import { Menu01Icon, Cancel01Icon } from 'hugeicons-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'Admissions', href: '/admissions' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home',       href: '/'           },
+  { label: 'About',      href: '/about'       },
+  { label: 'Programs',   href: '/programs'    },
+  { label: 'Admissions', href: '/admissions'  },
+  { label: 'Contact',    href: '/contact'     },
 ];
 
 function LogoMark() {
   const [imgError, setImgError] = useState(false);
 
   if (imgError) {
-    /* Fallback: initials shield */
     return (
-      <div className="w-10 h-10 rounded-xl bg-brand-red flex items-center justify-center flex-shrink-0">
-        <span className="text-white font-black text-sm tracking-tight">DM</span>
+      <div className="w-9 h-9 rounded-lg bg-navy flex items-center justify-center flex-shrink-0">
+        <span className="text-white font-black text-xs tracking-tight">DM</span>
       </div>
     );
   }
 
   return (
-    <div className="relative w-10 h-10 flex-shrink-0">
+    <div className="relative w-9 h-9 flex-shrink-0">
       <Image
         src="/images/logo.png"
         alt="De-Masters Academy crest"
         fill
-        sizes="40px"
-        className="object-contain drop-shadow-sm"
+        sizes="36px"
+        className="object-contain"
         priority
         onError={() => setImgError(true)}
       />
@@ -48,31 +47,40 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  /* text colors shift between hero (white on dark) and scrolled (navy on white) */
+  const linkBase    = scrolled ? 'text-slate-600 hover:text-navy' : 'text-white/80 hover:text-white';
+  const linkActive  = scrolled ? 'text-navy'                      : 'text-white';
+  const iconColor   = scrolled ? '#002366'                        : 'white';
+
   return (
     <header
       className={[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-brand-blue/97 backdrop-blur-md shadow-lg py-2'
-          : 'bg-transparent py-4',
+          ? 'bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm py-3'
+          : 'bg-transparent py-5',
       ].join(' ')}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <LogoMark />
-          <div className="flex flex-col leading-tight">
-            <span className="text-white font-bold text-[17px] tracking-wide">
+          <div className="flex flex-col leading-none">
+            <span
+              className={`font-bold text-[15px] tracking-wide transition-colors duration-300 ${
+                scrolled ? 'text-navy' : 'text-white'
+              }`}
+            >
               De-Masters
             </span>
-            <span className="text-brand-red text-[9px] font-bold tracking-[0.3em] uppercase">
+            <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
               Academy
             </span>
           </div>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-0.5">
           {navLinks.map(({ label, href }) => {
             const active = pathname === href;
             return (
@@ -80,14 +88,14 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 className={[
-                  'relative px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-200 group',
-                  active ? 'text-white' : 'text-white/75 hover:text-white hover:bg-white/8',
+                  'relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 group',
+                  active ? linkActive : linkBase,
                 ].join(' ')}
               >
                 {label}
                 <span
                   className={[
-                    'absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-brand-red',
+                    'absolute bottom-1 left-4 right-4 h-[1.5px] rounded-full bg-accent',
                     'transition-transform duration-300 origin-left',
                     active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                   ].join(' ')}
@@ -95,10 +103,10 @@ export default function Navbar() {
               </Link>
             );
           })}
+
           <Link
             href="/admissions"
-            className="ml-3 bg-brand-red text-white text-sm font-semibold px-5 py-2.5 rounded-2xl hover:bg-brand-red-dark hover:shadow-lg hover:shadow-brand-red/30 transition-all duration-300"
-            style={{ transition: 'all 0.25s var(--bounce)' }}
+            className="ml-4 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all duration-200"
           >
             Apply Now
           </Link>
@@ -108,9 +116,13 @@ export default function Navbar() {
         <button
           onClick={() => setMenuOpen((p) => !p)}
           aria-label="Toggle menu"
-          className="md:hidden text-white p-2 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+          className={`md:hidden p-2 rounded-lg transition-colors cursor-pointer ${
+            scrolled ? 'hover:bg-slate-100' : 'hover:bg-white/10'
+          }`}
         >
-          {menuOpen ? <Cancel01Icon size={22} /> : <Menu01Icon size={22} />}
+          {menuOpen
+            ? <X size={22} color={iconColor} />
+            : <Menu size={22} color={iconColor} />}
         </button>
       </div>
 
@@ -122,7 +134,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="md:hidden overflow-hidden bg-brand-blue border-t border-white/10"
+            className="md:hidden overflow-hidden bg-white border-t border-slate-100 shadow-lg"
           >
             <nav className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map(({ label, href }) => {
@@ -133,9 +145,10 @@ export default function Navbar() {
                     href={href}
                     onClick={() => setMenuOpen(false)}
                     className={[
-                      'py-3 px-4 rounded-xl text-base font-medium transition-colors',
-                      'border-b border-white/8 last:border-0',
-                      active ? 'text-brand-red bg-brand-red/8' : 'text-white/80 hover:text-white hover:bg-white/8',
+                      'py-3 px-4 rounded-lg text-sm font-medium transition-colors border-b border-slate-50 last:border-0',
+                      active
+                        ? 'text-navy bg-blue-50 font-semibold'
+                        : 'text-slate-600 hover:text-navy hover:bg-slate-50',
                     ].join(' ')}
                   >
                     {label}
@@ -145,7 +158,7 @@ export default function Navbar() {
               <Link
                 href="/admissions"
                 onClick={() => setMenuOpen(false)}
-                className="mt-3 bg-brand-red text-white text-center font-semibold px-5 py-3 rounded-2xl hover:bg-brand-red-dark transition-colors"
+                className="mt-3 bg-accent text-white text-center font-semibold px-5 py-3 rounded-lg hover:bg-accent-dark transition-colors text-sm"
               >
                 Apply Now
               </Link>

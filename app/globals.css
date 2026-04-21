@@ -1,38 +1,39 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Brand colors */
-  --color-brand-red: #C1121F;
-  --color-brand-red-dark: #9b0e18;
-  --color-brand-blue: #000033;
-  --color-brand-blue-light: #000055;
+  /* ── Primary palette (60-30-10) ──────────────────────────────────── */
+  --color-navy:            #002366;   /* 60 % — headings, text, nav */
+  --color-navy-light:      #0a3080;
+  --color-soft-white:      #F8F9FA;   /* 30 % — section backgrounds  */
+  --color-accent:          #D6001C;   /* 10 % — CTAs only            */
+  --color-accent-dark:     #b50018;
 
-  /* Typography */
-  --font-sans: var(--font-google-sans-flex), system-ui, sans-serif;
+  /* Legacy aliases — keeps existing components working */
+  --color-brand-red:       #D6001C;
+  --color-brand-red-dark:  #b50018;
+  --color-brand-blue:      #002366;
+  --color-brand-blue-light:#0a3080;
 
-  /* Background / foreground */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* ── Typography ──────────────────────────────────────────────────── */
+  --font-serif: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-sans:  var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* ── Base ────────────────────────────────────────────────────────── */
+  --color-background: #ffffff;
+  --color-foreground:  #1a1a2e;
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a2e;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html  { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background:  var(--background);
+  color:       var(--foreground);
   font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Bouncy easing for interactions */
-* {
-  --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
