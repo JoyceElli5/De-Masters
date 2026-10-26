@@ -14,31 +14,14 @@ import { events } from '@/src/data/events';
 export default function HomePage() {
   return (
     <>
-      {/* 1. Fullscreen video hero */}
       <Hero />
-
-      {/* 2. Stats trust strip */}
       <TrustStrip />
-
-      {/* 3. Interactive programme cards */}
       <Programs programs={programs} preview />
-
-      {/* 4. Why choose us — split layout */}
       <WhyChooseUs />
-
-      {/* 5. Student life masonry */}
       <StudentLife />
-
-      {/* 6. Big statement with NURTURE */}
       <BigStatement />
-
-      {/* 7. Testimonials carousel */}
       <Testimonials testimonials={testimonials} />
-
-      {/* 8. Events */}
       <Events events={events} />
-
-      {/* 9. Final CTA */}
       <CTA />
     </>
   );

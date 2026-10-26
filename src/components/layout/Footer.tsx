@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import LogoMark from '@/src/components/layout/LogoMark';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 function InstagramIcon({ size = 16 }: { size?: number }) {
@@ -16,6 +16,7 @@ const quickLinks = [
   { label: 'Home',       href: '/'           },
   { label: 'About',      href: '/about'       },
   { label: 'Programs',   href: '/programs'    },
+  { label: 'Student Life', href: '/students' },
   { label: 'Admissions', href: '/admissions'  },
   { label: 'Contact',    href: '/contact'     },
 ];
@@ -44,15 +45,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="lg:col-span-1 flex flex-col gap-5">
           <Link href="/" className="flex items-center gap-3 w-fit">
-            <div className="relative w-11 h-11 flex-shrink-0">
-              <Image
-                src="/images/logo.png"
-                alt="De-Masters Academy crest"
-                fill
-                sizes="44px"
-                className="object-contain"
-              />
-            </div>
+            <LogoMark size={44} />
             <div className="flex flex-col leading-none">
               <span className="text-white font-bold text-base tracking-wide">De-Masters</span>
               <span className="text-accent font-bold text-[8px] tracking-[0.3em] uppercase mt-0.5">Academy</span>
@@ -60,7 +53,7 @@ export default function Footer() {
           </Link>
 
           <p className="text-white/50 text-sm leading-relaxed">
-            Shaping the leaders of tomorrow through excellence, discipline, and innovation.
+            Early Childhood to Senior Secondary in Accra, Ghana, since 2009.
           </p>
 
           <p className="text-white/25 text-[10px] tracking-[0.2em] uppercase font-semibold">

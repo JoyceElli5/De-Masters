@@ -25,18 +25,18 @@ export default function Select({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={selectId} className="text-sm font-semibold text-gray-700">
+      <label htmlFor={selectId} className="text-sm font-medium text-slate-700">
         {label}
       </label>
       <select
         id={selectId}
         className={[
-          'rounded-2xl border px-4 py-3 text-base outline-none bg-white',
+          'rounded-lg border px-4 py-3 text-base outline-none bg-white',
           'transition-all duration-200 cursor-pointer',
-          'focus:border-brand-red focus:ring-3 focus:ring-brand-red/15',
+          'focus:border-navy focus:ring-3 focus:ring-navy/10',
           error
             ? 'border-red-400 bg-red-50/50 ring-2 ring-red-200'
-            : 'border-gray-200 hover:border-gray-300',
+            : 'border-slate-200 hover:border-slate-300',
           className,
         ].join(' ')}
         {...props}

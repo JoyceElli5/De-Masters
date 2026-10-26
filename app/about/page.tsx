@@ -1,191 +1,118 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+import PageHeader from '@/src/components/layout/PageHeader';
+import Reveal from '@/src/components/ui/Reveal';
 import Staff from '@/src/components/sections/Staff';
 import CTA from '@/src/components/sections/CTA';
 import { staff } from '@/src/data/staff';
-import {
-  Award01Icon,
-  Shield01Icon,
-  BulbIcon,
-  UserGroupIcon,
-} from 'hugeicons-react';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description:
+    'The history, mission, values and staff of De-Masters Academy in Accra, Ghana.',
+};
 
 const values = [
   {
-    Icon: Award01Icon,
+    num: '01',
     title: 'Excellence',
     description:
-      'We set the highest academic standards and inspire every student to reach their full potential.',
-    color: '#C1121F',
-    bg: '#fee2e2',
+      'High standards in every class, and help for every student to meet them.',
   },
   {
-    Icon: Shield01Icon,
+    num: '02',
     title: 'Discipline',
     description:
-      'We cultivate self-discipline, responsibility, and respect as cornerstones of character.',
-    color: '#000033',
-    bg: '#e0e7ff',
+      'Self-control, responsibility and respect for others.',
   },
   {
-    Icon: BulbIcon,
+    num: '03',
     title: 'Innovation',
     description:
-      'We embrace modern teaching methods and technology to prepare students for a rapidly changing world.',
-    color: '#d97706',
-    bg: '#fef3c7',
+      'New teaching methods and technology where they help children learn.',
   },
   {
-    Icon: UserGroupIcon,
+    num: '04',
     title: 'Inclusivity',
     description:
-      'We celebrate diversity and ensure every child feels seen, valued, and empowered to succeed.',
-    color: '#16a34a',
-    bg: '#dcfce7',
+      'Every child belongs here, whatever their background.',
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero banner */}
-      <section className="relative bg-brand-blue text-white pt-32 pb-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-blue to-brand-blue-light opacity-90" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-red/60 to-transparent" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-              Our Story
-            </p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-5 leading-tight">
-              About Us
-            </h1>
-            <p className="text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
-              De-Masters Academy — a beacon of academic excellence and holistic
-              education since 2009.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        title="About"
+        italic="De-Masters"
+        description="A school in Accra teaching children from Early Childhood to Senior Secondary since 2009."
+      />
 
-      {/* School intro */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-              Who We Are
-            </p>
-            <h2 className="text-4xl font-bold text-brand-blue mb-6 leading-tight">
-              Shaping Leaders Since 2009
+      {/* School intro + mission & vision */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <Reveal x={-24} y={0}>
+            <h2 className="font-serif text-4xl font-bold text-navy leading-tight mb-6">
+              Our story
             </h2>
-            <div className="flex flex-col gap-4 text-gray-600 text-[17px] leading-relaxed">
+            <div className="flex flex-col gap-4 text-slate-600 text-base leading-relaxed">
               <p>
-                Founded in 2009, De-Masters Academy has grown from a small
-                community school into one of the region&apos;s most respected
-                educational institutions, serving over 1,200 students from
-                Early Childhood through Senior Secondary.
+                De-Masters Academy opened in 2009 as a small community school.
+                Today we teach over 1,200 students, from Early Childhood through
+                Senior Secondary.
               </p>
               <p>
-                Our modern campus features science laboratories, a well-stocked
-                library, sports facilities, ICT suites, and dedicated arts
-                spaces — all designed to support every dimension of a student&apos;s
-                development.
+                The campus has science labs, a library, computer rooms, sports
+                grounds and rooms for art and music.
               </p>
               <p>
-                We are accredited by the Ghana Education Service and consistently
-                rank among the top-performing schools in national examinations.
+                We are accredited by the Ghana Education Service.
               </p>
             </div>
-          </motion.div>
+          </Reveal>
 
-          {/* Mission & Vision — premium split card */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-5"
-          >
-            {/* Mission */}
-            <div className="relative bg-brand-blue rounded-2xl p-8 text-white overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 -translate-y-8 translate-x-8" />
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 bg-brand-red/20 text-brand-red text-xs font-bold px-3 py-1.5 rounded-xl mb-4 tracking-wider uppercase">
-                  Mission
-                </div>
-                <p className="text-white/85 leading-relaxed text-[17px]">
-                  To provide a world-class education that equips students with
-                  the knowledge, skills, values, and character needed to lead
-                  and serve in a global community.
-                </p>
-              </div>
+          <Reveal x={24} y={0} className="flex flex-col gap-5">
+            <div className="relative bg-navy rounded-2xl p-8 text-white overflow-hidden">
+              <p className="text-accent text-[10px] font-bold tracking-[0.25em] uppercase mb-4">
+                Our Mission
+              </p>
+              <p className="font-serif text-xl leading-relaxed text-white/90">
+                To give every student the knowledge, skills and character to lead
+                and to serve.
+              </p>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent" />
             </div>
 
-            {/* Vision */}
-            <div className="relative bg-brand-red rounded-2xl p-8 text-white overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-white/5 translate-y-8 -translate-x-8" />
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 bg-white/15 text-white text-xs font-bold px-3 py-1.5 rounded-xl mb-4 tracking-wider uppercase">
-                  Vision
-                </div>
-                <p className="text-white/85 leading-relaxed text-[17px]">
-                  To be the leading centre of excellence in education —
-                  producing graduates who are academically outstanding, morally
-                  grounded, and globally competitive.
-                </p>
-              </div>
+            <div className="relative bg-[#F8F9FA] border border-slate-100 rounded-2xl p-8 overflow-hidden">
+              <p className="text-accent text-[10px] font-bold tracking-[0.25em] uppercase mb-4">
+                Our Vision
+              </p>
+              <p className="font-serif text-xl leading-relaxed text-navy">
+                Graduates who do well in their studies, live with integrity and
+                can compete anywhere.
+              </p>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
       {/* Core values */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-[#F8F9FA] border-t border-slate-100">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-3">
-              What We Stand For
-            </p>
-            <h2 className="text-4xl font-bold text-brand-blue leading-tight">
-              Our Core Values
-            </h2>
+          <div className="mb-12">
+            <h2 className="font-serif text-4xl font-bold text-navy">What we value</h2>
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {values.map(({ Icon, title, description, color, bg }, i) => (
-              <motion.div
+            {values.map(({ num, title, description }, i) => (
+              <Reveal
                 key={title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                delay={i * 0.07}
+                className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"
               >
-                <motion.div
-                  whileHover={{ y: -4, boxShadow: '0 16px 40px -8px rgba(0,0,0,0.1)' }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                  className="bg-white rounded-2xl p-6 h-full flex flex-col gap-4 border border-gray-100"
-                >
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: bg }}
-                  >
-                    <Icon size={22} color={color} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-brand-blue mb-2">{title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
+                <span className="font-serif text-accent text-2xl font-bold block mb-4">{num}</span>
+                <h3 className="font-serif text-navy font-semibold text-xl mb-2">{title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
+              </Reveal>
             ))}
           </div>
         </div>

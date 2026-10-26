@@ -1,86 +1,71 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import PageHeader from '@/src/components/layout/PageHeader';
+import Reveal from '@/src/components/ui/Reveal';
 import Programs from '@/src/components/sections/Programs';
 import CTA from '@/src/components/sections/CTA';
 import { programs } from '@/src/data/programs';
-import { CheckmarkCircle01Icon } from 'hugeicons-react';
+
+export const metadata: Metadata = {
+  title: 'Programmes',
+  description:
+    'Early Childhood, Primary, Junior and Senior Secondary, plus STEM & Robotics and Arts & Culture at De-Masters Academy.',
+};
 
 const enrolmentSteps = [
   'Complete the online application form.',
   'Submit academic records and birth certificate.',
   'Attend an entrance assessment (Grade 7 and above).',
-  'Receive your offer letter within 5 business days.',
+  'Receive your offer letter within 3–5 business days.',
   'Accept and pay the enrolment fee to secure your place.',
 ];
 
 export default function ProgramsPage() {
   return (
     <>
-      {/* Header */}
-      <section className="relative bg-brand-blue text-white pt-32 pb-24 px-6 overflow-hidden">
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-red/60 to-transparent" />
-        <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-white/4 blur-3xl" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-              Education Pathways
-            </p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-5 leading-tight">
-              Our Programmes
-            </h1>
-            <p className="text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
-              Comprehensive academic programmes designed to nurture every
-              student from early childhood through to senior secondary level.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        title="Our"
+        italic="Programmes"
+        description="Classes from age 3 to Grade 12, plus clubs in science, technology and the arts."
+      />
 
-      {/* All programs grid */}
-      <Programs programs={programs} preview={false} />
+      <Programs programs={programs} />
 
       {/* Enrolment steps */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-10">
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-3">
-              Get Started
-            </p>
-            <h2 className="text-3xl font-bold text-brand-blue mb-4 leading-tight">
-              How to Enrol
+      <section className="py-24 px-6 bg-[#F8F9FA] border-t border-slate-100">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <Reveal>
+            <h2 className="font-serif text-4xl font-bold text-navy leading-tight mb-4">
+              How to enrol
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed">
-              Joining De-Masters Academy is straightforward. Follow these
-              simple steps and our admissions team will guide you through the
-              rest.
+            <p className="text-slate-500 text-base leading-relaxed mb-8 max-w-md">
+              Five steps. The admissions office can help with any of them.
             </p>
-          </div>
+            <Link
+              href="/admissions#apply"
+              className="group inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3 rounded-lg text-sm hover:bg-accent-dark transition-all duration-200"
+            >
+              Start Application
+              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Link>
+          </Reveal>
 
-          <div className="flex flex-col gap-4">
-            {enrolmentSteps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-start gap-4 bg-gray-50 rounded-2xl p-4 hover:bg-gray-100 transition-colors duration-200"
-              >
-                <div className="w-8 h-8 rounded-xl bg-brand-red flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-                  {i + 1}
-                </div>
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <p className="text-gray-700 font-medium text-[15px]">{step}</p>
-                </div>
-                <CheckmarkCircle01Icon size={18} color="#C1121F" className="flex-shrink-0 opacity-50 mt-0.5" />
-              </motion.div>
-            ))}
-          </div>
+          <Reveal x={24} y={0}>
+            <ol className="flex flex-col gap-3">
+              {enrolmentSteps.map((step, i) => (
+                <li
+                  key={step}
+                  className="flex items-center gap-5 bg-white rounded-xl p-5 border border-slate-100 shadow-sm"
+                >
+                  <span className="font-serif text-accent text-lg font-bold leading-none flex-shrink-0 w-6">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-navy font-medium text-sm">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
       </section>
 

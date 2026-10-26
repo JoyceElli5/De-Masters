@@ -1,19 +1,21 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { DM_Serif_Display, DM_Sans } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/src/components/layout/Navbar';
 import Footer from '@/src/components/layout/Footer';
+import MotionProvider from '@/src/components/layout/MotionProvider';
 
-const playfair = Playfair_Display({
+const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-dm-serif',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: '400',
+  style: ['normal', 'italic'],
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-dm-sans',
   display: 'swap',
 });
 
@@ -24,11 +26,11 @@ export const metadata: Metadata = {
     template: '%s | De-Masters Academy',
   },
   description:
-    'De-Masters Academy — a world-class learning institution committed to Trust & Hardwork. Excellence, Discipline, and Innovation since 2009.',
+    'De-Masters Academy in Accra, Ghana. Early Childhood to Senior Secondary since 2009. Motto: Trust & Hardwork.',
   keywords: ['school', 'academy', 'education', 'De-Masters', 'Ghana'],
   openGraph: {
     title: 'De-Masters Academy',
-    description: 'Trust & Hardwork — Excellence • Discipline • Innovation',
+    description: 'Early Childhood to Senior Secondary in Accra, Ghana, since 2009.',
     type: 'website',
     images: [{ url: '/images/logo.png', width: 512, height: 512, alt: 'De-Masters Academy Crest' }],
   },
@@ -36,11 +38,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${dmSerif.variable} ${dmSans.variable}`}>
       <body className="min-h-screen flex flex-col antialiased bg-white text-slate-800">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

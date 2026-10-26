@@ -18,14 +18,16 @@ const variants = {
 export default function Testimonials({ testimonials }: TestimonialsProps) {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const t = setTimeout(() => {
       setDirection(1);
       setActive((i) => (i + 1) % testimonials.length);
     }, 5500);
     return () => clearTimeout(t);
-  }, [active, testimonials.length]);
+  }, [active, paused, testimonials.length]);
 
   function goTo(i: number) {
     setDirection(i > active ? 1 : -1);
@@ -39,16 +41,18 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
       <div className="max-w-3xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-2">
-            What Our Community Says
-          </p>
           <h2 className="font-serif text-4xl font-bold text-navy">
-            Voices of De-Masters
+            What parents and alumni say
           </h2>
         </div>
 
-        {/* Slide */}
-        <div className="relative min-h-[180px] flex items-center">
+        {/* Slide — pauses while the visitor is reading or using the dots */}
+        <div
+          className="relative min-h-[180px] flex items-center"
+          aria-live={paused ? 'polite' : 'off'}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={active}
@@ -60,12 +64,6 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="w-full text-center"
             >
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-sm">★</span>
-                ))}
-              </div>
 
               {/* Quote — serif italic */}
               <blockquote className="font-serif text-xl md:text-2xl italic text-slate-700 leading-relaxed max-w-2xl mx-auto mb-8">
@@ -88,12 +86,17 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
         </div>
 
         {/* Dot navigation */}
-        <div className="flex items-center justify-center gap-2.5 mt-10">
+        <div
+          className="flex items-center justify-center gap-2.5 mt-10"
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+        >
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Testimonial ${i + 1}`}
+              aria-current={i === active}
               className={[
                 'rounded-full transition-all duration-300 cursor-pointer',
                 i === active ? 'w-5 h-2 bg-accent' : 'w-2 h-2 bg-slate-200 hover:bg-slate-300',

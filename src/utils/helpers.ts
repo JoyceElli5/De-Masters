@@ -18,17 +18,29 @@ export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+const TITLES = new Set(['mr', 'mrs', 'ms', 'miss', 'dr', 'prof', 'rev']);
+
 /**
- * Returns initials from a full name.
- * e.g. "John Doe" → "JD"
+ * Returns initials from a full name, skipping titles and symbols.
+ * e.g. "John Doe" → "JD", "Mr. & Mrs. Frimpong" → "F"
  */
 export function getInitials(name: string): string {
   return name
-    .split(' ')
+    .split(/\s+/)
+    .map((part) => part.replace(/[^\p{L}]/gu, ''))
+    .filter((part) => part && !TITLES.has(part.toLowerCase()))
     .map((part) => part[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);
+}
+
+/**
+ * Turns a label into a file-name-safe slug.
+ * e.g. "Sports & Athletics" → "sports-athletics"
+ */
+export function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 /**

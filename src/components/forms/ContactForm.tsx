@@ -63,9 +63,9 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-5"
+      className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8 flex flex-col gap-5"
     >
-      <h3 className="text-2xl font-bold text-brand-blue">Send Us a Message</h3>
+      <h2 className="font-serif text-2xl font-bold text-navy">Send Us a Message</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Input
@@ -98,8 +98,8 @@ export default function ContactForm() {
         placeholder="How can we help?"
       />
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="message" className="text-sm font-medium text-gray-700">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="message" className="text-sm font-medium text-slate-700">
           Message *
         </label>
         <textarea
@@ -110,9 +110,9 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Write your message here..."
           className={[
-            'rounded-lg border px-4 py-3 text-base outline-none transition-colors resize-none',
-            'focus:border-brand-red focus:ring-2 focus:ring-brand-red/20',
-            errors.message ? 'border-red-500 bg-red-50' : 'border-gray-300',
+            'rounded-lg border px-4 py-3 text-base outline-none transition-all duration-200 resize-none',
+            'focus:border-navy focus:ring-3 focus:ring-navy/10 placeholder:text-gray-400',
+            errors.message ? 'border-red-400 bg-red-50/50 ring-2 ring-red-200' : 'border-slate-200 hover:border-slate-300',
           ].join(' ')}
         />
         {errors.message && (
@@ -127,7 +127,7 @@ export default function ContactForm() {
       )}
       {formState.isSuccess && (
         <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg">
-          ✅ Message sent! We&apos;ll get back to you within 24 hours.
+          Message sent! We&apos;ll get back to you within 24 hours.
         </div>
       )}
 

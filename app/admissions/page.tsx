@@ -1,14 +1,20 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+import { Check, ChevronDown } from 'lucide-react';
+import PageHeader from '@/src/components/layout/PageHeader';
+import Reveal from '@/src/components/ui/Reveal';
 import AdmissionForm from '@/src/components/forms/AdmissionForm';
-import { CheckmarkCircle01Icon } from 'hugeicons-react';
+
+export const metadata: Metadata = {
+  title: 'Admissions',
+  description:
+    'How to apply to De-Masters Academy: steps, required documents, common questions and the application form.',
+};
 
 const requirements = [
   'Original birth certificate of the student',
   'Certified copy of most recent school report',
   'Two recent passport-sized photographs',
-  'Completed application form (below)',
+  'Completed application form',
   'Parent/guardian national ID copy',
   'Proof of address (utility bill or equivalent)',
 ];
@@ -38,122 +44,68 @@ const faqs = [
 export default function AdmissionsPage() {
   return (
     <>
-      {/* Header */}
-      <section className="relative bg-brand-blue text-white pt-32 pb-24 px-6 overflow-hidden">
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-red/60 to-transparent" />
-        <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-white/4 blur-3xl" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-              Join Our Community
-            </p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-5 leading-tight">
-              Admissions
-            </h1>
-            <p className="text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
-              We welcome students who are eager to learn, grow, and contribute
-              to our vibrant school community.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        title="Admissions"
+        description="We take new students in September and January. Here is how to apply."
+      />
 
       {/* Process steps */}
-      <section className="py-16 px-6 bg-white border-b border-gray-100">
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <p className="text-center text-brand-red font-semibold tracking-[0.2em] uppercase text-xs mb-10">
-            How It Works
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map(({ step, title, body }, i) => (
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col gap-3"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-brand-red flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-                  {step}
-                </div>
-                <div>
-                  <h3 className="font-bold text-brand-blue mb-1">{title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute" />
-                )}
-              </motion.div>
-            ))}
+          <div className="mb-12">
+            <h2 className="font-serif text-4xl font-bold text-navy">
+              How it works
+            </h2>
           </div>
+
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {steps.map(({ step, title, body }) => (
+              <li key={step} className="relative bg-[#F8F9FA] rounded-2xl p-6 border border-slate-100 overflow-hidden">
+                <span className="font-serif text-accent text-3xl font-bold block mb-4">{step}</span>
+                <h3 className="font-serif text-navy font-semibold text-lg mb-1.5">{title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
       {/* Requirements + Form */}
-      <section className="py-16 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
-          {/* Left sidebar */}
-          <div className="lg:col-span-2 flex flex-col gap-8">
-            {/* Required documents */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
-            >
-              <h2 className="text-xl font-bold text-brand-blue mb-5">
-                Required Documents
-              </h2>
+      <section id="apply" className="py-24 px-6 bg-[#F8F9FA] border-t border-slate-100 scroll-mt-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
+          {/* Form first on small screens — it's what most visitors came for */}
+          <Reveal className="lg:col-span-3 lg:order-2" x={24} y={0}>
+            <AdmissionForm />
+          </Reveal>
+
+          <div className="lg:col-span-2 lg:order-1 flex flex-col gap-6">
+            <Reveal className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+              <h2 className="font-serif text-xl font-bold text-navy mb-5">Required Documents</h2>
               <ul className="flex flex-col gap-3">
                 {requirements.map((req) => (
-                  <li key={req} className="flex items-start gap-3 text-gray-600 text-sm">
-                    <CheckmarkCircle01Icon
-                      size={18}
-                      color="#C1121F"
-                      className="flex-shrink-0 mt-0.5"
-                    />
+                  <li key={req} className="flex items-start gap-3 text-slate-600 text-sm">
+                    <Check size={16} className="text-accent flex-shrink-0 mt-0.5" />
                     {req}
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </Reveal>
 
-            {/* FAQs */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
-            >
-              <h2 className="text-xl font-bold text-brand-blue mb-5">FAQs</h2>
-              <div className="flex flex-col gap-5">
+            <Reveal delay={0.08} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+              <h2 className="font-serif text-xl font-bold text-navy mb-3">Common Questions</h2>
+              <div className="flex flex-col divide-y divide-slate-100">
                 {faqs.map(({ q, a }) => (
-                  <div key={q} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-                    <p className="font-semibold text-brand-blue text-sm mb-1.5">{q}</p>
-                    <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
-                  </div>
+                  <details key={q} className="group py-3">
+                    <summary className="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-navy text-sm [&::-webkit-details-marker]:hidden">
+                      {q}
+                      <ChevronDown size={16} className="text-slate-400 flex-shrink-0 transition-transform duration-200 group-open:rotate-180" />
+                    </summary>
+                    <p className="text-slate-500 text-sm leading-relaxed mt-2">{a}</p>
+                  </details>
                 ))}
               </div>
-            </motion.div>
+            </Reveal>
           </div>
-
-          {/* Right: form */}
-          <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <AdmissionForm />
-          </motion.div>
         </div>
       </section>
     </>

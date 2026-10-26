@@ -10,19 +10,19 @@ export default function Input({ label, error, className = '', id, ...props }: In
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={inputId} className="text-sm font-semibold text-gray-700">
+      <label htmlFor={inputId} className="text-sm font-medium text-slate-700">
         {label}
       </label>
       <input
         id={inputId}
         className={[
-          'rounded-2xl border px-4 py-3 text-base outline-none',
+          'rounded-lg border px-4 py-3 text-base outline-none',
           'transition-all duration-200',
-          'focus:border-brand-red focus:ring-3 focus:ring-brand-red/15',
+          'focus:border-navy focus:ring-3 focus:ring-navy/10',
           'placeholder:text-gray-400',
           error
             ? 'border-red-400 bg-red-50/50 ring-2 ring-red-200'
-            : 'border-gray-200 bg-white hover:border-gray-300',
+            : 'border-slate-200 bg-white hover:border-slate-300',
           className,
         ].join(' ')}
         {...props}

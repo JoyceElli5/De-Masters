@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-brand-red text-white hover:bg-brand-red-dark shadow-sm hover:shadow-brand-red/30 hover:shadow-md focus-visible:ring-brand-red',
+    'bg-accent text-white hover:bg-accent-dark focus-visible:ring-accent',
   secondary:
     'bg-brand-blue text-white hover:bg-brand-blue-light shadow-sm hover:shadow-brand-blue/30 hover:shadow-md focus-visible:ring-brand-blue',
   outline:
@@ -24,9 +24,9 @@ const variantClasses: Record<Variant, string> = {
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-4 py-2 text-sm rounded-xl',
-  md: 'px-6 py-3 text-base rounded-2xl',
-  lg: 'px-8 py-4 text-lg rounded-2xl',
+  sm: 'px-4 py-2 text-sm rounded-lg',
+  md: 'px-6 py-3 text-sm rounded-lg',
+  lg: 'px-8 py-3.5 text-base rounded-lg',
 };
 
 export default function Button({
@@ -40,8 +40,8 @@ export default function Button({
 }: ButtonProps) {
   return (
     <motion.button
-      whileHover={disabled || isLoading ? {} : { scale: 1.03 }}
-      whileTap={disabled || isLoading ? {} : { scale: 0.97 }}
+      whileHover={disabled || isLoading ? {} : { scale: 1.01 }}
+      whileTap={disabled || isLoading ? {} : { scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       disabled={disabled || isLoading}
       className={[

@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 export default function BigStatement() {
   return (
     <section className="relative py-32 px-6 bg-[#F8F9FA] overflow-hidden">
-      {/* Very faint watermark — legible on light background */}
+      {/* Faint watermark behind the text */}
       <div
         aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center text-[18vw] font-serif font-bold text-slate-200 leading-none select-none pointer-events-none whitespace-nowrap"
@@ -23,16 +23,6 @@ export default function BigStatement() {
           transition={{ duration: 0.5 }}
           className="w-10 h-px bg-accent mx-auto mb-8 origin-center"
         />
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-5"
-        >
-          Our Promise to Every Student
-        </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
@@ -53,9 +43,8 @@ export default function BigStatement() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-slate-500 text-base leading-relaxed mb-10 max-w-lg mx-auto"
         >
-          Every child who walks through our gates leaves with more than a
-          certificate — they leave with character, confidence, and the capacity
-          to change the world.
+          Our students leave with good results, good habits and the
+          confidence to use them.
         </motion.p>
 
         <motion.div
@@ -66,9 +55,9 @@ export default function BigStatement() {
         >
           <Link
             href="/admissions"
-            className="group inline-flex items-center gap-2 bg-accent text-white font-semibold px-8 py-3 rounded-lg text-sm hover:bg-accent-dark transition-all duration-200"
+            className="group inline-flex items-center gap-2 bg-accent text-white font-semibold px-8 py-3 rounded-lg text-sm hover:bg-accent-dark transition-colors duration-200"
           >
-            Begin the Journey
+            Apply Now
             <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
           </Link>
         </motion.div>

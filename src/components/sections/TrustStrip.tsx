@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import CountUp from '@/src/components/ui/CountUp';
 
 const stats = [
   { value: '15+',    label: 'Years of Excellence'  },
@@ -24,7 +25,7 @@ export default function TrustStrip() {
               className="flex flex-col items-center py-10 px-6 gap-2 text-center"
             >
               <span className="font-serif text-4xl font-bold text-navy leading-none">
-                {value}
+                <CountUp value={value} delay={i * 0.08} />
               </span>
               {/* Thin red accent line */}
               <span className="w-6 h-px bg-accent block" />

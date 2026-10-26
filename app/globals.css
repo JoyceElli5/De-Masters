@@ -15,8 +15,8 @@
   --color-brand-blue-light:#0a3080;
 
   /* ── Typography ──────────────────────────────────────────────────── */
-  --font-serif: var(--font-playfair), Georgia, 'Times New Roman', serif;
-  --font-sans:  var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-dm-serif), Georgia, 'Times New Roman', serif;
+  --font-sans:  var(--font-dm-sans), system-ui, -apple-system, sans-serif;
 
   /* ── Base ────────────────────────────────────────────────────────── */
   --color-background: #ffffff;
@@ -29,6 +29,16 @@
 }
 
 html  { scroll-behavior: smooth; }
+
+/* DM Serif Display ships one weight — show its real letterforms instead of a fake bold */
+.font-serif { font-synthesis-weight: none; }
+
+/* Slide-in animations start off-screen — never let them cause sideways scroll */
+html, body { overflow-x: clip; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   background:  var(--background);

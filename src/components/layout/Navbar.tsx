@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import LogoMark from '@/src/components/layout/LogoMark';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@/src/hooks/useScroll';
@@ -12,51 +12,27 @@ const navLinks = [
   { label: 'Home',       href: '/'           },
   { label: 'About',      href: '/about'       },
   { label: 'Programs',   href: '/programs'    },
+  { label: 'Student Life', href: '/students' },
   { label: 'Admissions', href: '/admissions'  },
   { label: 'Contact',    href: '/contact'     },
 ];
-
-function LogoMark() {
-  const [imgError, setImgError] = useState(false);
-
-  if (imgError) {
-    return (
-      <div className="w-9 h-9 rounded-lg bg-navy flex items-center justify-center flex-shrink-0">
-        <span className="text-white font-black text-xs tracking-tight">DM</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative w-9 h-9 flex-shrink-0">
-      <Image
-        src="/images/logo.png"
-        alt="De-Masters Academy crest"
-        fill
-        sizes="36px"
-        className="object-contain"
-        priority
-        onError={() => setImgError(true)}
-      />
-    </div>
-  );
-}
 
 export default function Navbar() {
   const scrolled = useScroll(60);
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const solid = scrolled || menuOpen;
 
   /* text colors shift between hero (white on dark) and scrolled (navy on white) */
-  const linkBase    = scrolled ? 'text-slate-600 hover:text-navy' : 'text-white/80 hover:text-white';
-  const linkActive  = scrolled ? 'text-navy'                      : 'text-white';
-  const iconColor   = scrolled ? '#002366'                        : 'white';
+  const linkBase    = solid ? 'text-slate-600 hover:text-navy' : 'text-white/80 hover:text-white';
+  const linkActive  = solid ? 'text-navy'                      : 'text-white';
+  const iconColor   = solid ? '#002366'                        : 'white';
 
   return (
     <header
       className={[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled
+        solid
           ? 'bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm py-3'
           : 'bg-transparent py-5',
       ].join(' ')}
@@ -64,11 +40,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <LogoMark />
+          <LogoMark priority />
           <div className="flex flex-col leading-none">
             <span
               className={`font-bold text-[15px] tracking-wide transition-colors duration-300 ${
-                scrolled ? 'text-navy' : 'text-white'
+                solid ? 'text-navy' : 'text-white'
               }`}
             >
               De-Masters
@@ -80,7 +56,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-0.5">
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navLinks.map(({ label, href }) => {
             const active = pathname === href;
             return (
@@ -115,9 +91,10 @@ export default function Navbar() {
         {/* Hamburger */}
         <button
           onClick={() => setMenuOpen((p) => !p)}
-          aria-label="Toggle menu"
-          className={`md:hidden p-2 rounded-lg transition-colors cursor-pointer ${
-            scrolled ? 'hover:bg-slate-100' : 'hover:bg-white/10'
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          className={`lg:hidden p-2 rounded-lg transition-colors cursor-pointer ${
+            solid ? 'hover:bg-slate-100' : 'hover:bg-white/10'
           }`}
         >
           {menuOpen
@@ -134,7 +111,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="md:hidden overflow-hidden bg-white border-t border-slate-100 shadow-lg"
+            className="lg:hidden overflow-hidden bg-white border-t border-slate-100 shadow-lg"
           >
             <nav className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map(({ label, href }) => {

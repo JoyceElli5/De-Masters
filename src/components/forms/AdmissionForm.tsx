@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useForm } from '@/src/hooks/useForm';
 import { AdmissionFormData } from '@/src/types';
 import { isValidEmail } from '@/src/utils/helpers';
@@ -38,18 +39,38 @@ function validate(values: AdmissionFormData): Partial<Record<keyof AdmissionForm
 export default function AdmissionForm() {
   const { values, errors, formState, handleChange, handleSubmit } = useForm(initialValues);
 
+  /* Pre-select the programme when arriving from "Apply for this programme" */
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('program');
+    if (wanted && programOptions.some((o) => o.value === wanted)) {
+      handleChange({ target: { name: 'program', value: wanted } } as React.ChangeEvent<HTMLSelectElement>);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   async function onSubmit(data: AdmissionFormData) {
-    const { error } = await getSupabaseClient().from('applications').insert([data]);
-    if (error) throw new Error(error.message);
+    let client;
+    try {
+      client = getSupabaseClient();
+    } catch {
+      throw new Error(
+        'Online applications are not available right now. Please call or email the admissions office.'
+      );
+    }
+    const { error } = await client.from('applications').insert([data]);
+    if (error) throw new Error('We could not submit your application. Please try again in a moment.');
   }
 
   return (
     <form
       onSubmit={(e) => handleSubmit(e, onSubmit, validate)}
       noValidate
-      className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-5"
+      className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8 flex flex-col gap-5"
     >
-      <h3 className="text-2xl font-bold text-brand-blue">Application Form</h3>
+      <div>
+        <h2 className="font-serif text-2xl font-bold text-navy mb-1">Application Form</h2>
+        <p className="text-slate-500 text-sm">Fields marked * are required.</p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Input
@@ -123,7 +144,7 @@ export default function AdmissionForm() {
       )}
       {formState.isSuccess && (
         <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg">
-          ✅ Application submitted successfully! We will be in touch within 3–5 business days.
+          Application submitted successfully! We will be in touch within 3–5 business days.
         </div>
       )}
 
@@ -137,10 +158,6 @@ export default function AdmissionForm() {
       >
         Submit Application
       </Button>
-
-      <p className="text-xs text-gray-500 text-center">
-        By submitting this form you agree to our admissions process and data privacy policy.
-      </p>
     </form>
   );
 }
